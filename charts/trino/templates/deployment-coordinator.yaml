@@ -64,6 +64,14 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             {{- toYaml .Values.env | nindent 12 }}
+          {{- if .Values.secretEnvs }}
+          envFrom:
+            {{- range .Values.secretEnvs }}
+            - valueFrom:
+                secretKeyRef:
+                  name: {{ .name }}
+            {{- end }}
+          {{- end }}
           volumeMounts:
             - mountPath: {{ .Values.server.config.path }}
               name: config-volume

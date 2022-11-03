@@ -154,6 +154,8 @@ serviceAccount:
 
 secretMounts: []
 
+secretEnvs: []
+
 coordinator:
   jvm:
     maxHeapSize: "8G"
